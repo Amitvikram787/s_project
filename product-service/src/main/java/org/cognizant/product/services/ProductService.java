@@ -68,7 +68,7 @@ public class ProductService {
 
 	@Transactional
 	public void addProduct(Product product) throws ProductAlreadyExistsException {
-		if (productRepository.findById(product.getProductCode()) == null) {
+		if (!productRepository.findById(product.getProductCode()).isPresent() ) {
 			productRepository.save(product);
 		} else {
 			throw new ProductAlreadyExistsException(
@@ -76,6 +76,12 @@ public class ProductService {
 		}
 
 	}
+	@Transactional
+	public List<Product> search(String query) {
+		return this.productRepository.findByStockCountGreaterThanAndProductNameContainingOrProductCodeContainingOrBrandContaining(0, query, query, query);
+	}
+
+	
 
 	public List<Product> getRecommendations(List<BillDTO> bills, String userId, List<Category> categories) {
 		System.out.println(bills);
@@ -150,4 +156,5 @@ public class ProductService {
 		
 		return sugges;
 	}
+	
 }

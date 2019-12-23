@@ -40,6 +40,7 @@ import { FeedbackComponent } from './user/feedback/feedback.component';
 import { RelatedProductComponent } from './product/related-product/related-product.component';
 import { ManageShopManagerComponent } from './super-admin/manage-shop-manager/manage-shop-manager.component';
 import { ManageAdminComponent } from './super-admin/manage-admin/manage-admin.component';
+import { SearchResultsComponent } from './product/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ManageAdminComponent } from './super-admin/manage-admin/manage-admin.co
     RelatedProductComponent,
     FeedbackComponent,
     ManageShopManagerComponent,
-    ManageAdminComponent
+    ManageAdminComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,

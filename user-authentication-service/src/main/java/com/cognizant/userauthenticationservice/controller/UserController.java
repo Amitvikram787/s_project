@@ -61,6 +61,7 @@ public class UserController {
 				user.getSecretQuestion1(), user.getSecretQuestion2(), user.getSecretQuestion3());
 		return userSecretQuestionDto;
 	}
+	
 
 	@PostMapping("/secret-questions/verify")
 	public boolean verifySecretAnswer(@RequestBody UserSecretAnswerDto userSecretAnswerDto)
@@ -163,4 +164,9 @@ public class UserController {
 	public Feedback getFeedback(@PathVariable int feedbackId) {
 		return userService.getFeedbackById(feedbackId);
 	}
+	
+	@GetMapping("/feedback")
+		public List<UserFeedback> getAllFeedback(){
+			return userService.getAllFeedback();
+		} 
 }

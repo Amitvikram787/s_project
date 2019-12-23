@@ -1,8 +1,5 @@
 <ul class="nav nav-pills mt-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-      aria-controls="pills-home" aria-selected="true">Home</a>
-  </li>
+  
   <li class="nav-item">
     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
       aria-controls="pills-profile" aria-selected="false">Shop Manager</a>
@@ -14,6 +11,24 @@
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> 
+  <!-- <div class="card">
+    <div class="card-header">
+      User Feedback
+    </div>
+    <div class="card-body">
+      <div class="row" *ngFor="let feedback of feedback">
+        <div class="col-6">
+          <label>{{feedback.question1}}</label>
+          
+        </div>
+        <div class="col-6">
+          {{feedback.Answer1}}
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+
   </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
     <app-manage-shop-manager></app-manage-shop-manager>

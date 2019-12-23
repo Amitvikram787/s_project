@@ -1,5 +1,7 @@
 package com.cognizant.userauthenticationservice.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +29,9 @@ public class UserService {
 	public Feedback getFeedbackById(int feedbackId) {
 		return feedbackRepository.findById(feedbackId).get();
 	}
+	
+	@Transactional
+	public List<UserFeedback> getAllFeedback(){
+		return userFeedbackRepository.findAll();
+	} 
 }

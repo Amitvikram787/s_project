@@ -23,6 +23,7 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
 import { FeedbackComponent } from './user/feedback/feedback.component';
 import { ForgotPasswordComponent } from './site/forgot-password/forgot-password.component';
 import { ResetComponent } from './site/reset/reset.component';
+import { SearchResultsComponent } from './product/search-results/search-results.component';
 
 
 
@@ -202,8 +203,14 @@ const routes: Routes = [
   canActivate: [AuthGuardService],
   data:{
     role:RoleName.ROLE_SUPER_USER
-  }
+  },
+  
+},
+{
+  path: 'search/:query',
+  component: SearchResultsComponent
 }
+
   
 ];
 

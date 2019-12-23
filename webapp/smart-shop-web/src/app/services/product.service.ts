@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, VirtualTimeScheduler } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Product, Category } from '../product/product.model';
+import { UserSearchText, SearchText } from '../site/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   _baseUrl = `${environment.baseUrl}/product-service`;
+  private _allProducts: BehaviorSubject<Product[]> = new BehaviorSubject(null);
   constructor(private http: HttpClient) { }
+  set allProducts(products: Product[]) {
+    this._allProducts.next(products);
+  }
+  get allProducts() {
+    return this._allProducts.value;
+  }
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this._baseUrl}/products`);
   }
@@ -53,5 +61,17 @@ export class ProductService {
   }
   deleteProduct(productCode: string) {
     return this.http.delete(`${this._baseUrl}/products/${productCode}`);
+  }
+  getSearchHistory(userId: string): Observable<UserSearchText> {
+    return this.http.get<UserSearchText>(`${this._baseUrl}/search-history/${userId}`);
+  }
+  addSearchHistory(searchText: SearchText): Observable<SearchText> {
+    return this.http.post<SearchText>(`${this._baseUrl}/search-history`, searchText);
+  } 
+  deleteSearchHistory(userId: string): Observable<void> {
+    return this.http.get<void>(`${this._baseUrl}/${userId}`);
+  }
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this._baseUrl}/products/search/${query}`);
   }
 }

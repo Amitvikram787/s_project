@@ -15,6 +15,49 @@
                     <span class="text-info "> {{totalCategories}}</span>
                 </div>
             </div>
+
         </div>
     </div>
+    <div id="accordion">
+        <ul class="list-group">
+            <li *ngFor="let feedback of userFeedback" class="list-group-item list-group-item-action">
+                 <span><strong>{{feedback.date}}</strong></span>
+                <span class="ml-5"><strong>{{feedback.user.userId}}</strong></span>
+                <span class="d-flex float-right ml-auto mr-3">
+                    <button class="btn btn-link text-primary d-flex float-right" data-toggle="collapse"
+                        [attr.data-target]="'#f'+feedback.userFeedbackId">
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </button>
+                </span>  
+                <div [id]="'f'+feedback.userFeedbackId" class="collapse row justify-content-center mt-2" data-parent="#accordion">
+                    <div class="col-6"><strong>Questions</strong></div>
+                    <div class="col-6"><strong>Answers</strong> </div>
+                    <div class="col-6">{{feedback.feedback.question1}} </div>
+                    <div class="col-6">{{feedback.answer1}}</div>
+                    <div class="col-6">{{feedback.feedback.question2}}</div>
+                    <div class="col-6">{{feedback.answer2}}</div>
+                    <div class="col-6">{{feedback.feedback.question3}}</div>
+                    <div class="col-6">{{feedback.answer3}}</div>
+                    <div class="col-6">{{feedback.feedback.question4}}</div>
+                    <div class="col-6">{{feedback.answer4}}</div>
+                    <div class="col-6">{{feedback.feedback.question5}}</div>
+                    <div class="col-6">{{feedback.answer5}}</div>
+                    <div class="col-6">{{feedback.feedback.question6}}</div>
+                    <div class="col-6">{{feedback.answer6}}</div>
+                    <div class="col-6">{{feedback.feedback.question7}}</div>
+                    <div class="col-6">{{feedback.answer7}}</div>
+                    <div class="col-6">{{feedback.feedback.question8}}</div>
+                    <div class="col-6">{{feedback.answer8}}</div>
+                    <div class="col-6">{{feedback.feedback.question9}} </div>
+                    <div class="col-6">{{feedback.answer9}}</div>
+                    <div class="col-6">{{feedback.feedback.question10}}</div>
+                    <div class="col-6">{{feedback.answer10}}</div>
+
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
+   
 </div>

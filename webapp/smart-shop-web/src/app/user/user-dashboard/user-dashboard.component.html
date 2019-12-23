@@ -3,7 +3,7 @@
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Deals of the day</h5>
-                <a  class="btn btn-primary" [routerLink]="['/product-list']" *ngIf="offers && offers?.length>0" [state]="{display: 'Deals of the Day'}">View All</a >
+                <a  class="btn btn-info" [routerLink]="['/product-list']" *ngIf="offers && offers?.length>0" [state]="{display: 'Deals of the Day'}">View All</a >
             </div>
             <div class="card-body product-list overflow-auto d-flex" *ngIf="offers">
                 <app-item-info class="product-item" *ngFor="let offer of offers" [offer]="offer"></app-item-info>
@@ -19,7 +19,7 @@
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Suggested for you</h5>
-                <a [routerLink]="['/product-list']" *ngIf="suggestions && suggestions?.length>0" [state]="{display: 'Recommendations'}"  class="btn btn-primary">View All</a>
+                <a [routerLink]="['/product-list']" *ngIf="suggestions && suggestions?.length>0" [state]="{display: 'Recommendations'}"  class="btn btn-info">View All</a>
             </div>
             <div class="card-body product-list overflow-auto d-flex">
                     <!-- <app-item-info class="product-item"></app-item-info>
@@ -60,7 +60,7 @@
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>All Products</h5>
-                <a [routerLink]="['/product-list']" [state]="{display: 'All Products'}"  class="btn btn-primary">View All</a>
+                <a [routerLink]="['/product-list']" [state]="{display: 'All Products'}"  class="btn btn-info">View All</a>
             </div>
             <div class="card-body product-list overflow-auto d-flex">
                    <app-item-info [product]="product" *ngFor="let product of allProducts"></app-item-info>

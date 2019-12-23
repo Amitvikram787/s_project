@@ -3,14 +3,61 @@
         {{displayString}}
     </div>
 </div>
+<div class="row pt-3 bg-white">
+    <div class="col-6">
+      <span class="mr-2">Filter</span>
+      <div class="row">
+        <div class="col-12 col-md-6 mt-1">
+          <select name="filterBy" id="filterBy" class="form-control" [formControl]="filterBy">
+            <option value="">All</option>
+            <option value="offerName" *ngIf="offerList">Offer Name</option>
+            <!-- <option value="offerDate">Offer Date</option> -->
+            <option value="productCode">Product Code</option>
+            <option value="productName">Product Name</option>
+            <option value="category" *ngIf="productList">Category</option>
+            <option value="brand" *ngIf="productList">Brand</option>
+            
+            <option value="discountRate" *ngIf="offerList">Discount Rate</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6 mt-1">
+          <input (keydown)="checkDate()" [formControl]="filterValue"
+            [type]="filterBy.value==='offerDate'? 'date': filterBy.value==='discount'?'number': 'text'"
+            [placeholder]="filterBy.value != 'date'?'Enter value':null" *ngIf="filterBy.value" class="form-control"
+            name="filter" id="filter">
+        </div>
+      </div>
+  
+    </div>
+    <div class="col-12 col-md-6">
+      <span class="mr-2">Sort By</span>
+      <div class="row mt-1">
+        <div class="col-6">
+          <select name="filter" id="filter" class="form-control" [formControl]="sortBy">
+            <option value="offerId"> Id</option>
+            <option value="offerDate" *ngIf="offerList">Offer Date</option>
+            <option value="offerName" *ngIf="offerList">Offer Name</option>
+            <option value="product">Product Name</option>
+            <option value="discountRate" *ngIf="offerList">Discount Rate</option>
+            <option value="rate" *ngIf="productList">Product Rate</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6">
+          <input type="radio" name="sort" id="asc" class="mr-1" value="asc" [formControl]="sortOrder"> <label
+            for="asc">Ascending</label>
+          <input type="radio" name="sort" id="dsc" class="ml-2 mr-1" [formControl]="sortOrder" value="dsc"> <label
+            for="dsc">Descending</label>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="row" *ngIf="productList">
-    <div class="col-12 col-md-6 col-lg-3 mt-3" *ngFor="let product of productList">
+    <div class="col-12 col-md-6 col-lg-3 mt-3" *ngFor="let product of filteredProducts">
         <app-item-info [product]="product"></app-item-info>
     </div>
-    
 </div>
 <div class="row" *ngIf="offerList">
-    <div class="col-12 col-md-6 col-lg-3 mt-3" *ngFor="let offer of offerList">
+    <div class="col-12 col-md-6 col-lg-3 mt-3" *ngFor="let offer of filteredOffers">
         <app-item-info [offer]="offer"></app-item-info>
     </div>
     

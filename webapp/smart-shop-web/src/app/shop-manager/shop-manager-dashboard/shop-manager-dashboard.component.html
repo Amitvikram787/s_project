@@ -3,7 +3,7 @@
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>INVENTORY</h5>
-                <a class="btn btn-primary" [routerLink]="['/manager/dashboard/inventory']">Manage</a>
+                <a class="btn btn-info" [routerLink]="['/manager/dashboard/inventory']">Manage</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -28,12 +28,12 @@
                     <div class="col-12 d-flex justify-content-between">
                         <h5>BILLING</h5>
                         <div>
-                            <a [routerLink]="['/manager/bill/new']" class="btn btn-primary mr-2">
+                            <a [routerLink]="['/manager/bill/new']" class="btn btn-info mr-2">
                                 New
                             </a>
-                            <!-- <a [routerLink]="['/manager/bill']" class="btn btn-primary">
+                            <a [routerLink]="['/manager/bill']" class="btn btn-info">
                                 View All
-                            </a> -->
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -64,14 +64,31 @@
                 <div class="row">
                     <div class="col-12 d-flex justify-content-between">
                         <h5>Offers</h5>
-                        <a class="btn btn-primary" [routerLink]="['/manager/offers']">Manage Offer</a>
+                        <a class="btn btn-info" [routerLink]="['/manager/offers']">Manage Offer</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <h5>Todays Offers</h5>
                 <ul *ngIf="offers" class="list-group">
-                    <li *ngFor="let offer of offers" class="list-group-item">{{offer|json}}</li>
+                    <li *ngFor="let offer of offers" class="list-group-item">
+                        <div>
+                            <span> <b> Offer Name</b> Name : {{offer.offerName}}</span>   
+
+                        </div>
+                        <div>
+                            <span> <b>Product Name</b> : {{offer.productName}}</span>   
+
+                        </div>
+                        <div>
+                            <span> <b>Disscounted Rate </b> : {{offer.discountRate}}</span>   
+
+                        </div>
+                        <div>
+                            <span><b>Offer Date </b> : {{offer.offerDate| date :'mediumDate'}}</span>   
+
+                        </div>
+                     </li>
                 </ul>
             </div>
         </div>

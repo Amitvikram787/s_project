@@ -1,0 +1,23 @@
+.rad
+{
+    border-radius: 20px;
+}
+.card-header{
+    text-align: center;
+    font-size: 30px;
+  
+    color: white;
+    background-color:rgb(120, 202, 216) ;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-control{
+    text-align: center;
+    
+    padding: 20px;
+}
+
+.card-footer{
+   background-color:rgb(120, 202, 216);
+   color: white;
+}

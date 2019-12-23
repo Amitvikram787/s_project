@@ -14,4 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 	public List<Product> findProductsByCategory(int id);
 	
 	public List<Product> findByStockCountGreaterThan(int stockCount);
+	
+	public List<Product> findByStockCountGreaterThanAndProductNameContainingOrProductCodeContainingOrBrandContaining(int stockCount, String name, String code, String brand);
+
 }

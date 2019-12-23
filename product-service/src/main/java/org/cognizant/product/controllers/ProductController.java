@@ -2,6 +2,8 @@ package org.cognizant.product.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.cognizant.product.dto.BillDTO;
 import org.cognizant.product.dto.CategoryDto;
@@ -53,6 +55,14 @@ public class ProductController {
 	public List<ProductDto> getAllProducts() {
 		return convertProductsToProductDtos(productService.getAllProducts());
 	}
+	@GetMapping("/search/{query}")
+	public Set<ProductDto> search(@PathVariable("query") String query) {
+		List<Product> products = this.productService.search(query);
+		Set<ProductDto> searchResults = products.stream().map(product -> convertProductToProductDto(product))
+				.collect(Collectors.toSet());
+		return searchResults;
+	}
+
 
 	@GetMapping("/in-stock")
 	public List<ProductDto> getAllProductsInStock() {

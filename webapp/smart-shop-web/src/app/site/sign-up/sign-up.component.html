@@ -1,4 +1,4 @@
-<div class="row justify-content-center mt-3 mb-3">
+<div class="row justify-content-center mt-5 mb-5">
   <div class="col-12 col-md-10">
     <div class="card">
       <div class="card-body">
@@ -163,7 +163,7 @@
           </div>
           <div class="form-row mt-3">
             <div class="col-8">
-              <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid">Sign Up</button>
+              <button type="submit" class="btn btn-info" [disabled]="signUpForm.invalid">Sign Up</button>
             </div>
             <div class="col-4 text-right" *ngIf="!isAdmin()">
               Already have an account? <a [routerLink]="['/login']" >Login</a>

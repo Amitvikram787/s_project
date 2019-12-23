@@ -27,5 +27,16 @@ export interface Role {
    name: RoleName
 }
 
+export interface SearchText {
+   username: string;
+   searchText: string;
+}
+export interface UserSearchText {
+   username: string;
+   searchHistory: Array<SearchText>;
+}
+
+
+
 
 

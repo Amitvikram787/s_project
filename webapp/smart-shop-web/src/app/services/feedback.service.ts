@@ -19,4 +19,8 @@ export class FeedbackService {
   submitFeedback(feedback:UserFeedback){
     return this.httpClient.post<void>(`${this.baseUrl}/users/feedback`,feedback)
   }
+  getAllFeedback():Observable<UserFeedback[]>{
+        return this.httpClient.get<UserFeedback[]>(`${this.baseUrl}/feedback`)
+      } 
+
 }

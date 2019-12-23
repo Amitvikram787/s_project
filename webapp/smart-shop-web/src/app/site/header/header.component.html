@@ -1,52 +1,92 @@
-<div class="container-fluid bg-primary">
+<div class="container-fluid bg-info">
     <div class="row">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="navbar navbar-dark bg-primary navbar-expand-sm">
-                        <a (click)="home()" class="navbar-brand">
-                            Smart Shop
-                        </a>
-                        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcontent">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navcontent">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item" *ngIf="!loggedInUser">
-                                    <a [routerLink]="['/login']" routerLinkActive="active" class="nav-link">Login</a>
-                                </li>
-                                <li class="nav-item" *ngIf="!loggedInUser">
-                                    <a [routerLink]="['/sign-up']" routerLinkActive="active" class="nav-link">Sign
-                                        Up</a>
-                                </li>
-                                <li class="nav-item dropdown" *ngIf="loggedInUser">
-
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{loggedInUser.userId}}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" [routerLink]="['/account']"
-                                            routerLinkActive="active">Personal Details</a>
-                                        <a class="dropdown-item" [routerLink]="['/edit/password']"
-                                            routerLinkActive="active">Change Password</a>
-                                        <a class="dropdown-item" [routerLink]="['/user/purchase-history']"
-                                            routerLinkActive="active"
-                                            *ngIf="loggedInUser.role.name==='ROLE_USER'">Purchase History</a>
-                                        <a class="dropdown-item" [routerLink]="['/user/feedback']"
-                                            routerLinkActive="active"
-                                            *ngIf="loggedInUser.role.name==='ROLE_USER'">Provide Feedback</a>
-                                        <div class="dropdown-divider"></div>
-                                        <button class="dropdown-item" (click)="logout()">Logout</button>
-                                    </div>
-                                </li>
-                            </ul>
-
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="navbar navbar-dark bg-info navbar-expand-sm">
+              <a (click)="home()" class="navbar-brand">
+                Smart Shop
+              </a>
+              <button class="navbar-toggler" data-toggle="collapse" data-target="#navcontent">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navcontent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <div class="search-container">
+                      <div class="search-box shadow-sm d-flex align-items-center justify-content-between">
+                        <form (ngSubmit)="searchProduct(search.value)">
+                          <input type="text" [formControl]="search" (focus)="getSearchHistory()" (blur)="blur()"
+                            class="search-input" placeholder="Search for products">
+                          <button type="submit" class="btn btn-link fa fa-search text-primary"
+                            style="text-decoration: none;"> </button>
+                        </form>
+  
+                      </div>
+                      <div *ngIf="(searchHistory || productList) && focused" (clickOutside)="toggleFocus()"
+                        class="container shadow-sm search-box-suggestions d-none d-md-block">
+                        <div *ngIf="searchHistory">
+                          <div class="row  justify-content-between suggestion-row"
+                            *ngFor="let searchText of searchHistory.searchHistory"
+                            (click)="searchProduct(searchText.searchText)">
+                            <div class="col-1 p-0 d-flex">
+                              <i class="material-icons">history</i>
+                              <span class="ml-3">{{searchText.searchText}}</span>
+                            </div>
+                          </div>
                         </div>
-                    </nav>
-                </div>
-            </div>
+  
+                        <div class="dropdown-divider"></div>
+                        <div *ngIf="productList">
+                          <div class="row product-row" *ngFor="let product of productList" (click)="viewProduct(product)">
+                            <div class="col">
+                              <div>{{product.productName}}</div>
+                              <div>{{product.brand}}</div>
+                            </div>
+                            <div class="col">
+                              <div>Aisle: {{product.aisle}}</div>
+                              <div>Shelf: {{product.shelf}}</div>
+                            </div>
+                          </div>
+  
+                        </div>
+                      </div>
+                    </div>
+  
+                  </li>
+                  <li class="nav-item" *ngIf="!loggedInUser">
+                    <a [routerLink]="['/login']" routerLinkActive="active" class="nav-link">Login</a>
+                  </li>
+                  <li class="nav-item" *ngIf="!loggedInUser">
+                    <a [routerLink]="['/sign-up']" routerLinkActive="active" class="nav-link">Sign
+                      Up</a>
+                  </li>
+                  <li class="nav-item dropdown" *ngIf="loggedInUser">
+  
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{loggedInUser.firstName}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" [routerLink]="['/account']" routerLinkActive="active">Personal Details</a>
+                      <a class="dropdown-item" [routerLink]="['/edit/password']" routerLinkActive="active">Change
+                        Password</a>
+                      <a class="dropdown-item" [routerLink]="['/user/purchase-history']" routerLinkActive="active"
+                        *ngIf="loggedInUser.role.name==='ROLE_USER'">Purchase History</a>
+                      <a class="dropdown-item" [routerLink]="['/user/feedback']" routerLinkActive="active"
+                        *ngIf="loggedInUser.role.name==='ROLE_USER'">Provide Feedback</a>
+                      <div class="dropdown-divider"></div>
+                      <button class="dropdown-item" (click)="logout()">Logout</button>
+                    </div>
+                  </li>
+                </ul>
+  
+              </div>
+            </nav>
+          </div>
         </div>
-
+      </div>
+  
     </div>
-</div>
+  </div>
+  
